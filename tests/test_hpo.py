@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import copy
+import dataclasses
 
 import numpy as np
 import pytest
@@ -83,7 +83,7 @@ def test_hpo_never_sees_test_fold(karate_split):
     """不变量：翻转 test 标签后 HPO 结果必须完全不变（目标函数只用 valid 折）。"""
     cfg = _config()
     base = tune_hyperparameters(karate_split, cfg, seed=0, n_trials=4, force_tier1=True)
-    flipped = copy.replace(karate_split, test_labels=1 - karate_split.test_labels)
+    flipped = dataclasses.replace(karate_split, test_labels=1 - karate_split.test_labels)
     after = tune_hyperparameters(flipped, cfg, seed=0, n_trials=4, force_tier1=True)
     assert np.isclose(base.best_score, after.best_score), "HPO 不应受 test 标签影响（泄漏）"
     assert base.best_params == after.best_params
