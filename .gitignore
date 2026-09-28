@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+
+# 测试 / 缓存
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# 本地产物（benchmark.json 作为验证证据需要入库，故不忽略）
+run.json
+tier1.json
+*.log
+probe*.log
+scratch_*.py
+.optuna/
+graphforge.db
+
+# 数据缓存与模型权重
+data/cache/
+*.npz
+*.npy
+*.pt
+*.pth
+*.bin
+weights/
+
+# 密钥 / 环境变量
+.env
+.env.*
+*.pem
+*.key
+secrets.*
+credentials.*
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

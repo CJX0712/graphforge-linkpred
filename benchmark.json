@@ -1,0 +1,2172 @@
+{
+  "generated_by": "examples/run_demo.py",
+  "author": "晨星",
+  "version": "0.1.0",
+  "primary_scenario": "sbm700",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "baseline_ruling": {
+    "口径_A_primary": "vs node2vec 论文口径基线 CN/Jaccard/AA/PA/spectral（主性能门）",
+    "口径_B_reference": "含 Katz（补充参考基线，不属论文口径公平族；来源 arXiv:1607.00653 Table 3/4）",
+    "source": "spec/baseline_ruling.md",
+    "note": "双口径全公开，不构成挑基线刷赢；Katz 与 node2vec 在小型同配图上信息重合。"
+  },
+  "ablation": {
+    "control": "deepwalk(p=q=1)",
+    "treatment": "graphforge-node2vec",
+    "tier1_fallback": "graphforge-node2vec(tier1)"
+  },
+  "scenarios": {
+    "sbm700": {
+      "config": {
+        "graph": "sbm",
+        "n_nodes": 700,
+        "seed_base": 0,
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "train_ratio": 0.7,
+        "valid_ratio": 0.1,
+        "test_ratio": 0.2,
+        "dim": 64,
+        "walk_length": 48,
+        "num_walks": 2,
+        "window": 5,
+        "negative_samples": 5,
+        "epochs": 1,
+        "edge_operator": "hadamard",
+        "hpo_enabled": true,
+        "hpo_trials": 6,
+        "tier": "tier2"
+      },
+      "capabilities": {
+        "numpy": true,
+        "scipy": true,
+        "sklearn": true,
+        "networkx": true,
+        "optuna": true,
+        "gensim": false,
+        "torch": true,
+        "tier": "tier2"
+      },
+      "datasets": [
+        {
+          "seed": 0,
+          "graph": "sbm",
+          "n_nodes": 700,
+          "n_edges": 3486,
+          "split": {
+            "n_nodes": 700,
+            "n_edges_total": 3486,
+            "n_train_pos": 2440,
+            "n_valid_pos": 349,
+            "n_test_pos": 697,
+            "n_train_neg": 2440,
+            "n_valid_neg": 349,
+            "n_test_neg": 697
+          }
+        },
+        {
+          "seed": 1,
+          "graph": "sbm",
+          "n_nodes": 700,
+          "n_edges": 3487,
+          "split": {
+            "n_nodes": 700,
+            "n_edges_total": 3487,
+            "n_train_pos": 2441,
+            "n_valid_pos": 349,
+            "n_test_pos": 697,
+            "n_train_neg": 2441,
+            "n_valid_neg": 349,
+            "n_test_neg": 697
+          }
+        },
+        {
+          "seed": 2,
+          "graph": "sbm",
+          "n_nodes": 700,
+          "n_edges": 3560,
+          "split": {
+            "n_nodes": 700,
+            "n_edges_total": 3560,
+            "n_train_pos": 2492,
+            "n_valid_pos": 356,
+            "n_test_pos": 712,
+            "n_train_neg": 2492,
+            "n_valid_neg": 356,
+            "n_test_neg": 712
+          }
+        },
+        {
+          "seed": 3,
+          "graph": "sbm",
+          "n_nodes": 700,
+          "n_edges": 3640,
+          "split": {
+            "n_nodes": 700,
+            "n_edges_total": 3640,
+            "n_train_pos": 2548,
+            "n_valid_pos": 364,
+            "n_test_pos": 728,
+            "n_train_neg": 2548,
+            "n_valid_neg": 364,
+            "n_test_neg": 728
+          }
+        },
+        {
+          "seed": 4,
+          "graph": "sbm",
+          "n_nodes": 700,
+          "n_edges": 3494,
+          "split": {
+            "n_nodes": 700,
+            "n_edges_total": 3494,
+            "n_train_pos": 2446,
+            "n_valid_pos": 349,
+            "n_test_pos": 699,
+            "n_train_neg": 2446,
+            "n_valid_neg": 349,
+            "n_test_neg": 699
+          }
+        }
+      ],
+      "hpo": {
+        "backend": "optuna",
+        "n_trials": 6,
+        "best_score": 0.666538,
+        "best_params": {
+          "p": 1.473946,
+          "q": 0.37201,
+          "dim": 32
+        },
+        "history": [
+          {
+            "params": {
+              "p": 1.144926,
+              "q": 1.815992,
+              "dim": 32
+            },
+            "score": 0.660577
+          },
+          {
+            "params": {
+              "p": 1.49856,
+              "q": 0.8411,
+              "dim": 64
+            },
+            "score": 0.648714
+          },
+          {
+            "params": {
+              "p": 2.245287,
+              "q": 1.08341,
+              "dim": 64
+            },
+            "score": 0.663459
+          },
+          {
+            "params": {
+              "p": 0.318313,
+              "q": 0.264415,
+              "dim": 128
+            },
+            "score": 0.657236
+          },
+          {
+            "params": {
+              "p": 3.769762,
+              "q": 2.292043,
+              "dim": 64
+            },
+            "score": 0.649051
+          },
+          {
+            "params": {
+              "p": 1.473946,
+              "q": 0.37201,
+              "dim": 32
+            },
+            "score": 0.666538
+          }
+        ]
+      },
+      "tuned_params": {
+        "p": 1.473946,
+        "q": 0.37201,
+        "dim": 32
+      },
+      "results": [
+        {
+          "method": "graphforge-node2vec",
+          "n_seeds": 5,
+          "auc_mean": 0.673053,
+          "auc_std": 0.006266,
+          "ap_mean": 0.656764,
+          "ap_std": 0.007454,
+          "notes": ""
+        },
+        {
+          "method": "graphforge-node2vec(tier1)",
+          "n_seeds": 5,
+          "auc_mean": 0.662043,
+          "auc_std": 0.005728,
+          "ap_mean": 0.646471,
+          "ap_std": 0.009387,
+          "notes": ""
+        },
+        {
+          "method": "graphforge-node2vec+heur",
+          "n_seeds": 5,
+          "auc_mean": 0.6602,
+          "auc_std": 0.005988,
+          "ap_mean": 0.644463,
+          "ap_std": 0.005738,
+          "notes": ""
+        },
+        {
+          "method": "deepwalk(p=q=1)",
+          "n_seeds": 5,
+          "auc_mean": 0.654974,
+          "auc_std": 0.009446,
+          "ap_mean": 0.642969,
+          "ap_std": 0.004816,
+          "notes": ""
+        },
+        {
+          "method": "katz",
+          "n_seeds": 5,
+          "auc_mean": 0.635594,
+          "auc_std": 0.014034,
+          "ap_mean": 0.620584,
+          "ap_std": 0.0124,
+          "notes": ""
+        },
+        {
+          "method": "spectral",
+          "n_seeds": 5,
+          "auc_mean": 0.555849,
+          "auc_std": 0.009379,
+          "ap_mean": 0.566307,
+          "ap_std": 0.011711,
+          "notes": ""
+        },
+        {
+          "method": "adamic_adar",
+          "n_seeds": 5,
+          "auc_mean": 0.53039,
+          "auc_std": 0.006655,
+          "ap_mean": 0.523766,
+          "ap_std": 0.004055,
+          "notes": ""
+        },
+        {
+          "method": "resource_allocation",
+          "n_seeds": 5,
+          "auc_mean": 0.530373,
+          "auc_std": 0.006655,
+          "ap_mean": 0.5229,
+          "ap_std": 0.004446,
+          "notes": ""
+        },
+        {
+          "method": "jaccard",
+          "n_seeds": 5,
+          "auc_mean": 0.530291,
+          "auc_std": 0.006797,
+          "ap_mean": 0.524409,
+          "ap_std": 0.007076,
+          "notes": ""
+        },
+        {
+          "method": "common_neighbors",
+          "n_seeds": 5,
+          "auc_mean": 0.530221,
+          "auc_std": 0.006791,
+          "ap_mean": 0.521364,
+          "ap_std": 0.005208,
+          "notes": ""
+        },
+        {
+          "method": "preferential_attachment",
+          "n_seeds": 5,
+          "auc_mean": 0.503439,
+          "auc_std": 0.015426,
+          "ap_mean": 0.505909,
+          "ap_std": 0.006643,
+          "notes": ""
+        },
+        {
+          "method": "random",
+          "n_seeds": 5,
+          "auc_mean": 0.497883,
+          "auc_std": 0.004376,
+          "ap_mean": 0.501222,
+          "ap_std": 0.002952,
+          "notes": ""
+        }
+      ],
+      "per_seed": {
+        "graphforge-node2vec": [
+          {
+            "seed": 0,
+            "auc": 0.668942,
+            "ap": 0.644301,
+            "accuracy": 0.579627,
+            "seconds": 1.448
+          },
+          {
+            "seed": 1,
+            "auc": 0.677077,
+            "ap": 0.662608,
+            "accuracy": 0.56241,
+            "seconds": 1.179
+          },
+          {
+            "seed": 2,
+            "auc": 0.68335,
+            "ap": 0.659613,
+            "accuracy": 0.573034,
+            "seconds": 1.333
+          },
+          {
+            "seed": 3,
+            "auc": 0.669541,
+            "ap": 0.664695,
+            "accuracy": 0.57967,
+            "seconds": 1.26
+          },
+          {
+            "seed": 4,
+            "auc": 0.666356,
+            "ap": 0.652601,
+            "accuracy": 0.569385,
+            "seconds": 1.444
+          }
+        ],
+        "graphforge-node2vec(tier1)": [
+          {
+            "seed": 0,
+            "auc": 0.659162,
+            "ap": 0.632187,
+            "accuracy": 0.54089,
+            "seconds": 1.448
+          },
+          {
+            "seed": 1,
+            "auc": 0.671463,
+            "ap": 0.65987,
+            "accuracy": 0.545194,
+            "seconds": 1.179
+          },
+          {
+            "seed": 2,
+            "auc": 0.665762,
+            "ap": 0.643159,
+            "accuracy": 0.529494,
+            "seconds": 1.333
+          },
+          {
+            "seed": 3,
+            "auc": 0.656393,
+            "ap": 0.652882,
+            "accuracy": 0.554258,
+            "seconds": 1.26
+          },
+          {
+            "seed": 4,
+            "auc": 0.657434,
+            "ap": 0.644258,
+            "accuracy": 0.544349,
+            "seconds": 1.444
+          }
+        ],
+        "graphforge-node2vec+heur": [
+          {
+            "seed": 0,
+            "auc": 0.659292,
+            "ap": 0.637575,
+            "accuracy": 0.541607,
+            "seconds": 1.448
+          },
+          {
+            "seed": 1,
+            "auc": 0.670403,
+            "ap": 0.654435,
+            "accuracy": 0.538737,
+            "seconds": 1.179
+          },
+          {
+            "seed": 2,
+            "auc": 0.661365,
+            "ap": 0.646199,
+            "accuracy": 0.530197,
+            "seconds": 1.333
+          },
+          {
+            "seed": 3,
+            "auc": 0.651948,
+            "ap": 0.640807,
+            "accuracy": 0.54533,
+            "seconds": 1.26
+          },
+          {
+            "seed": 4,
+            "auc": 0.657993,
+            "ap": 0.643298,
+            "accuracy": 0.542203,
+            "seconds": 1.444
+          }
+        ],
+        "deepwalk(p=q=1)": [
+          {
+            "seed": 0,
+            "auc": 0.661657,
+            "ap": 0.641427,
+            "accuracy": 0.557389,
+            "seconds": 1.436
+          },
+          {
+            "seed": 1,
+            "auc": 0.660568,
+            "ap": 0.652371,
+            "accuracy": 0.560258,
+            "seconds": 1.158
+          },
+          {
+            "seed": 2,
+            "auc": 0.665361,
+            "ap": 0.641912,
+            "accuracy": 0.552669,
+            "seconds": 1.251
+          },
+          {
+            "seed": 3,
+            "auc": 0.645295,
+            "ap": 0.64025,
+            "accuracy": 0.565934,
+            "seconds": 1.531
+          },
+          {
+            "seed": 4,
+            "auc": 0.64199,
+            "ap": 0.638886,
+            "accuracy": 0.55794,
+            "seconds": 1.403
+          }
+        ],
+        "katz": [
+          {
+            "seed": 0,
+            "auc": 0.641575,
+            "ap": 0.613247,
+            "accuracy": 0.5,
+            "seconds": 0.334
+          },
+          {
+            "seed": 1,
+            "auc": 0.652479,
+            "ap": 0.636382,
+            "accuracy": 0.5,
+            "seconds": 0.446
+          },
+          {
+            "seed": 2,
+            "auc": 0.645458,
+            "ap": 0.630151,
+            "accuracy": 0.5,
+            "seconds": 0.725
+          },
+          {
+            "seed": 3,
+            "auc": 0.623168,
+            "ap": 0.621853,
+            "accuracy": 0.5,
+            "seconds": 1.13
+          },
+          {
+            "seed": 4,
+            "auc": 0.615291,
+            "ap": 0.601289,
+            "accuracy": 0.5,
+            "seconds": 0.33
+          }
+        ],
+        "spectral": [
+          {
+            "seed": 0,
+            "auc": 0.549129,
+            "ap": 0.561321,
+            "accuracy": 0.5,
+            "seconds": 0.213
+          },
+          {
+            "seed": 1,
+            "auc": 0.556005,
+            "ap": 0.561001,
+            "accuracy": 0.5,
+            "seconds": 0.373
+          },
+          {
+            "seed": 2,
+            "auc": 0.573044,
+            "ap": 0.587963,
+            "accuracy": 0.5,
+            "seconds": 0.296
+          },
+          {
+            "seed": 3,
+            "auc": 0.545922,
+            "ap": 0.553582,
+            "accuracy": 0.5,
+            "seconds": 0.336
+          },
+          {
+            "seed": 4,
+            "auc": 0.555144,
+            "ap": 0.567665,
+            "accuracy": 0.5,
+            "seconds": 0.257
+          }
+        ],
+        "adamic_adar": [
+          {
+            "seed": 0,
+            "auc": 0.532708,
+            "ap": 0.522791,
+            "accuracy": 0.514347,
+            "seconds": 0.005
+          },
+          {
+            "seed": 1,
+            "auc": 0.533881,
+            "ap": 0.526288,
+            "accuracy": 0.512912,
+            "seconds": 0.004
+          },
+          {
+            "seed": 2,
+            "auc": 0.526099,
+            "ap": 0.518019,
+            "accuracy": 0.50632,
+            "seconds": 0.004
+          },
+          {
+            "seed": 3,
+            "auc": 0.539231,
+            "ap": 0.529931,
+            "accuracy": 0.512363,
+            "seconds": 0.006
+          },
+          {
+            "seed": 4,
+            "auc": 0.520032,
+            "ap": 0.521802,
+            "accuracy": 0.515021,
+            "seconds": 0.002
+          }
+        ],
+        "resource_allocation": [
+          {
+            "seed": 0,
+            "auc": 0.532706,
+            "ap": 0.523098,
+            "accuracy": 0.5,
+            "seconds": 0.003
+          },
+          {
+            "seed": 1,
+            "auc": 0.533846,
+            "ap": 0.52419,
+            "accuracy": 0.5,
+            "seconds": 0.004
+          },
+          {
+            "seed": 2,
+            "auc": 0.526091,
+            "ap": 0.516763,
+            "accuracy": 0.5,
+            "seconds": 0.003
+          },
+          {
+            "seed": 3,
+            "auc": 0.539214,
+            "ap": 0.530156,
+            "accuracy": 0.5,
+            "seconds": 0.007
+          },
+          {
+            "seed": 4,
+            "auc": 0.520009,
+            "ap": 0.520291,
+            "accuracy": 0.5,
+            "seconds": 0.002
+          }
+        ],
+        "jaccard": [
+          {
+            "seed": 0,
+            "auc": 0.53174,
+            "ap": 0.514654,
+            "accuracy": 0.5,
+            "seconds": 0.002
+          },
+          {
+            "seed": 1,
+            "auc": 0.534173,
+            "ap": 0.528259,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 2,
+            "auc": 0.526329,
+            "ap": 0.522782,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 3,
+            "auc": 0.539534,
+            "ap": 0.535571,
+            "accuracy": 0.5,
+            "seconds": 0.002
+          },
+          {
+            "seed": 4,
+            "auc": 0.519677,
+            "ap": 0.520781,
+            "accuracy": 0.5,
+            "seconds": 0.002
+          }
+        ],
+        "common_neighbors": [
+          {
+            "seed": 0,
+            "auc": 0.531991,
+            "ap": 0.519715,
+            "accuracy": 0.532281,
+            "seconds": 0.002
+          },
+          {
+            "seed": 1,
+            "auc": 0.533893,
+            "ap": 0.524671,
+            "accuracy": 0.533716,
+            "seconds": 0.002
+          },
+          {
+            "seed": 2,
+            "auc": 0.526035,
+            "ap": 0.517216,
+            "accuracy": 0.525983,
+            "seconds": 0.002
+          },
+          {
+            "seed": 3,
+            "auc": 0.539484,
+            "ap": 0.529739,
+            "accuracy": 0.539148,
+            "seconds": 0.002
+          },
+          {
+            "seed": 4,
+            "auc": 0.519703,
+            "ap": 0.515481,
+            "accuracy": 0.519313,
+            "seconds": 0.002
+          }
+        ],
+        "preferential_attachment": [
+          {
+            "seed": 0,
+            "auc": 0.515236,
+            "ap": 0.513232,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.520003,
+            "ap": 0.508505,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 2,
+            "auc": 0.481543,
+            "ap": 0.494553,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 3,
+            "auc": 0.488462,
+            "ap": 0.502737,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 4,
+            "auc": 0.511951,
+            "ap": 0.510517,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          }
+        ],
+        "random": [
+          {
+            "seed": 0,
+            "auc": 0.495328,
+            "ap": 0.502015,
+            "accuracy": 0.494261,
+            "seconds": 0.001
+          },
+          {
+            "seed": 1,
+            "auc": 0.499828,
+            "ap": 0.502077,
+            "accuracy": 0.498565,
+            "seconds": 0.001
+          },
+          {
+            "seed": 2,
+            "auc": 0.491837,
+            "ap": 0.497676,
+            "accuracy": 0.502107,
+            "seconds": 0.001
+          },
+          {
+            "seed": 3,
+            "auc": 0.497555,
+            "ap": 0.505902,
+            "accuracy": 0.498626,
+            "seconds": 0.001
+          },
+          {
+            "seed": 4,
+            "auc": 0.504868,
+            "ap": 0.498442,
+            "accuracy": 0.487124,
+            "seconds": 0.001
+          }
+        ]
+      },
+      "table": "method                    seeds   auc_mean  auc_std   ap_mean   ap_std    \n--------------------------------------------------------------------------\ngraphforge-node2vec       5       0.6731    0.0063    0.6568    0.0075    \ngraphforge-node2vec(tier1)5       0.6620    0.0057    0.6465    0.0094    \ngraphforge-node2vec+heur  5       0.6602    0.0060    0.6445    0.0057    \ndeepwalk(p=q=1)           5       0.6550    0.0094    0.6430    0.0048    \nkatz                      5       0.6356    0.0140    0.6206    0.0124    \nspectral                  5       0.5558    0.0094    0.5663    0.0117    \nadamic_adar               5       0.5304    0.0067    0.5238    0.0041    \nresource_allocation       5       0.5304    0.0067    0.5229    0.0044    \njaccard                   5       0.5303    0.0068    0.5244    0.0071    \ncommon_neighbors          5       0.5302    0.0068    0.5214    0.0052    \npreferential_attachment   5       0.5034    0.0154    0.5059    0.0066    \nrandom                    5       0.4979    0.0044    0.5012    0.0030    ",
+      "comparisons": [
+        {
+          "challenger": "graphforge-node2vec",
+          "baseline": "katz",
+          "auc_mean_diff": 0.037459,
+          "std_gate": 0.01015,
+          "abs_gain": 0.037459,
+          "beats_by_mean": true,
+          "passes_std_gate": true,
+          "passes_abs_gate": true,
+          "significant": true
+        },
+        {
+          "challenger": "graphforge-node2vec",
+          "baseline": "graphforge-node2vec(tier1)",
+          "auc_mean_diff": 0.01101,
+          "std_gate": 0.005997,
+          "abs_gain": 0.01101,
+          "beats_by_mean": true,
+          "passes_std_gate": true,
+          "passes_abs_gate": false,
+          "significant": false
+        },
+        {
+          "challenger": "graphforge-node2vec",
+          "baseline": "deepwalk(p=q=1)",
+          "auc_mean_diff": 0.018079,
+          "std_gate": 0.007856,
+          "abs_gain": 0.018079,
+          "beats_by_mean": true,
+          "passes_std_gate": true,
+          "passes_abs_gate": false,
+          "significant": false
+        }
+      ],
+      "best_heuristic": "katz",
+      "failures": [
+        {
+          "kind": "false_positive",
+          "edge": [
+            97,
+            641
+          ],
+          "score": 0.875611,
+          "label": 0,
+          "common_neighbors": 2,
+          "deg_u": 11,
+          "deg_v": 8,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            93,
+            465
+          ],
+          "score": 0.873337,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 15,
+          "deg_v": 10,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            147,
+            605
+          ],
+          "score": 0.021496,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 4,
+          "deg_v": 7,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            229,
+            340
+          ],
+          "score": 0.026463,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 7,
+          "deg_v": 3,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            63,
+            379
+          ],
+          "score": 0.773053,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 8,
+          "deg_v": 7,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            170,
+            454
+          ],
+          "score": 0.770331,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 10,
+          "deg_v": 11,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            634,
+            656
+          ],
+          "score": 0.022551,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 3,
+          "deg_v": 9,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            472,
+            505
+          ],
+          "score": 0.033722,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 5,
+          "deg_v": 5,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            103,
+            491
+          ],
+          "score": 0.812678,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 6,
+          "deg_v": 11,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            178,
+            266
+          ],
+          "score": 0.793311,
+          "label": 0,
+          "common_neighbors": 2,
+          "deg_u": 6,
+          "deg_v": 6,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            359,
+            490
+          ],
+          "score": 0.026228,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 4,
+          "deg_v": 5,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            2,
+            167
+          ],
+          "score": 0.030844,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 5,
+          "deg_v": 6,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            245,
+            313
+          ],
+          "score": 0.80657,
+          "label": 0,
+          "common_neighbors": 0,
+          "deg_u": 12,
+          "deg_v": 8,
+          "attribution": "两端在训练图中无共同邻居且分属不同社群，模型依据高阶相似误判为存在连边。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            109,
+            605
+          ],
+          "score": 0.770354,
+          "label": 0,
+          "common_neighbors": 0,
+          "deg_u": 11,
+          "deg_v": 5,
+          "attribution": "两端在训练图中无共同邻居且分属不同社群，模型依据高阶相似误判为存在连边。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            253,
+            526
+          ],
+          "score": 0.022556,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 7,
+          "deg_v": 7,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            336,
+            546
+          ],
+          "score": 0.026343,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 10,
+          "deg_v": 6,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            158,
+            562
+          ],
+          "score": 0.89096,
+          "label": 0,
+          "common_neighbors": 0,
+          "deg_u": 10,
+          "deg_v": 13,
+          "attribution": "两端在训练图中无共同邻居且分属不同社群，模型依据高阶相似误判为存在连边。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            204,
+            300
+          ],
+          "score": 0.851867,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 8,
+          "deg_v": 8,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            50,
+            334
+          ],
+          "score": 0.019339,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 4,
+          "deg_v": 3,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            260,
+            467
+          ],
+          "score": 0.024475,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 4,
+          "deg_v": 4,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        }
+      ],
+      "total_seconds": 37.828
+    },
+    "karate": {
+      "config": {
+        "graph": "karate",
+        "n_nodes": 34,
+        "seed_base": 0,
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "train_ratio": 0.7,
+        "valid_ratio": 0.1,
+        "test_ratio": 0.2,
+        "dim": 64,
+        "walk_length": 24,
+        "num_walks": 6,
+        "window": 5,
+        "negative_samples": 5,
+        "epochs": 2,
+        "edge_operator": "hadamard",
+        "hpo_enabled": true,
+        "hpo_trials": 4,
+        "tier": "tier2"
+      },
+      "capabilities": {
+        "numpy": true,
+        "scipy": true,
+        "sklearn": true,
+        "networkx": true,
+        "optuna": true,
+        "gensim": false,
+        "torch": true,
+        "tier": "tier2"
+      },
+      "datasets": [
+        {
+          "seed": 0,
+          "graph": "karate",
+          "n_nodes": 34,
+          "n_edges": 78,
+          "split": {
+            "n_nodes": 34,
+            "n_edges_total": 78,
+            "n_train_pos": 54,
+            "n_valid_pos": 8,
+            "n_test_pos": 16,
+            "n_train_neg": 54,
+            "n_valid_neg": 8,
+            "n_test_neg": 16
+          }
+        },
+        {
+          "seed": 1,
+          "graph": "karate",
+          "n_nodes": 34,
+          "n_edges": 78,
+          "split": {
+            "n_nodes": 34,
+            "n_edges_total": 78,
+            "n_train_pos": 54,
+            "n_valid_pos": 8,
+            "n_test_pos": 16,
+            "n_train_neg": 54,
+            "n_valid_neg": 8,
+            "n_test_neg": 16
+          }
+        },
+        {
+          "seed": 2,
+          "graph": "karate",
+          "n_nodes": 34,
+          "n_edges": 78,
+          "split": {
+            "n_nodes": 34,
+            "n_edges_total": 78,
+            "n_train_pos": 54,
+            "n_valid_pos": 8,
+            "n_test_pos": 16,
+            "n_train_neg": 54,
+            "n_valid_neg": 8,
+            "n_test_neg": 16
+          }
+        },
+        {
+          "seed": 3,
+          "graph": "karate",
+          "n_nodes": 34,
+          "n_edges": 78,
+          "split": {
+            "n_nodes": 34,
+            "n_edges_total": 78,
+            "n_train_pos": 54,
+            "n_valid_pos": 8,
+            "n_test_pos": 16,
+            "n_train_neg": 54,
+            "n_valid_neg": 8,
+            "n_test_neg": 16
+          }
+        },
+        {
+          "seed": 4,
+          "graph": "karate",
+          "n_nodes": 34,
+          "n_edges": 78,
+          "split": {
+            "n_nodes": 34,
+            "n_edges_total": 78,
+            "n_train_pos": 54,
+            "n_valid_pos": 8,
+            "n_test_pos": 16,
+            "n_train_neg": 54,
+            "n_valid_neg": 8,
+            "n_test_neg": 16
+          }
+        }
+      ],
+      "hpo": {
+        "backend": "optuna",
+        "n_trials": 4,
+        "best_score": 0.6875,
+        "best_params": {
+          "p": 1.49856,
+          "q": 0.8411,
+          "dim": 64
+        },
+        "history": [
+          {
+            "params": {
+              "p": 1.144926,
+              "q": 1.815992,
+              "dim": 32
+            },
+            "score": 0.65625
+          },
+          {
+            "params": {
+              "p": 1.49856,
+              "q": 0.8411,
+              "dim": 64
+            },
+            "score": 0.6875
+          },
+          {
+            "params": {
+              "p": 2.245287,
+              "q": 1.08341,
+              "dim": 64
+            },
+            "score": 0.6875
+          },
+          {
+            "params": {
+              "p": 0.318313,
+              "q": 0.264415,
+              "dim": 128
+            },
+            "score": 0.6875
+          }
+        ]
+      },
+      "tuned_params": {
+        "p": 1.49856,
+        "q": 0.8411,
+        "dim": 64
+      },
+      "results": [
+        {
+          "method": "graphforge-node2vec",
+          "n_seeds": 5,
+          "auc_mean": 0.81875,
+          "auc_std": 0.046193,
+          "ap_mean": 0.841151,
+          "ap_std": 0.048779,
+          "notes": ""
+        },
+        {
+          "method": "deepwalk(p=q=1)",
+          "n_seeds": 5,
+          "auc_mean": 0.79375,
+          "auc_std": 0.0407,
+          "ap_mean": 0.820116,
+          "ap_std": 0.045064,
+          "notes": ""
+        },
+        {
+          "method": "graphforge-node2vec+heur",
+          "n_seeds": 5,
+          "auc_mean": 0.776563,
+          "auc_std": 0.063919,
+          "ap_mean": 0.785928,
+          "ap_std": 0.047994,
+          "notes": ""
+        },
+        {
+          "method": "graphforge-node2vec(tier1)",
+          "n_seeds": 5,
+          "auc_mean": 0.775,
+          "auc_std": 0.03636,
+          "ap_mean": 0.795723,
+          "ap_std": 0.031433,
+          "notes": ""
+        },
+        {
+          "method": "katz",
+          "n_seeds": 5,
+          "auc_mean": 0.710547,
+          "auc_std": 0.045561,
+          "ap_mean": 0.716088,
+          "ap_std": 0.047001,
+          "notes": ""
+        },
+        {
+          "method": "adamic_adar",
+          "n_seeds": 5,
+          "auc_mean": 0.654687,
+          "auc_std": 0.06116,
+          "ap_mean": 0.667588,
+          "ap_std": 0.03347,
+          "notes": ""
+        },
+        {
+          "method": "common_neighbors",
+          "n_seeds": 5,
+          "auc_mean": 0.654297,
+          "auc_std": 0.05346,
+          "ap_mean": 0.635564,
+          "ap_std": 0.031552,
+          "notes": ""
+        },
+        {
+          "method": "resource_allocation",
+          "n_seeds": 5,
+          "auc_mean": 0.653906,
+          "auc_std": 0.061085,
+          "ap_mean": 0.665713,
+          "ap_std": 0.034622,
+          "notes": ""
+        },
+        {
+          "method": "jaccard",
+          "n_seeds": 5,
+          "auc_mean": 0.646094,
+          "auc_std": 0.041568,
+          "ap_mean": 0.647236,
+          "ap_std": 0.049966,
+          "notes": ""
+        },
+        {
+          "method": "preferential_attachment",
+          "n_seeds": 5,
+          "auc_mean": 0.617578,
+          "auc_std": 0.048592,
+          "ap_mean": 0.60537,
+          "ap_std": 0.042416,
+          "notes": ""
+        },
+        {
+          "method": "random",
+          "n_seeds": 5,
+          "auc_mean": 0.50625,
+          "auc_std": 0.092095,
+          "ap_mean": 0.549017,
+          "ap_std": 0.073733,
+          "notes": ""
+        },
+        {
+          "method": "spectral",
+          "n_seeds": 5,
+          "auc_mean": 0.505469,
+          "auc_std": 0.212847,
+          "ap_mean": 0.584819,
+          "ap_std": 0.152346,
+          "notes": ""
+        }
+      ],
+      "per_seed": {
+        "graphforge-node2vec": [
+          {
+            "seed": 0,
+            "auc": 0.847656,
+            "ap": 0.872958,
+            "accuracy": 0.71875,
+            "seconds": 0.153
+          },
+          {
+            "seed": 1,
+            "auc": 0.753906,
+            "ap": 0.796385,
+            "accuracy": 0.59375,
+            "seconds": 0.143
+          },
+          {
+            "seed": 2,
+            "auc": 0.847656,
+            "ap": 0.867641,
+            "accuracy": 0.78125,
+            "seconds": 0.235
+          },
+          {
+            "seed": 3,
+            "auc": 0.871094,
+            "ap": 0.89798,
+            "accuracy": 0.65625,
+            "seconds": 0.139
+          },
+          {
+            "seed": 4,
+            "auc": 0.773438,
+            "ap": 0.770794,
+            "accuracy": 0.75,
+            "seconds": 0.136
+          }
+        ],
+        "deepwalk(p=q=1)": [
+          {
+            "seed": 0,
+            "auc": 0.796875,
+            "ap": 0.828823,
+            "accuracy": 0.71875,
+            "seconds": 0.143
+          },
+          {
+            "seed": 1,
+            "auc": 0.769531,
+            "ap": 0.812223,
+            "accuracy": 0.625,
+            "seconds": 0.157
+          },
+          {
+            "seed": 2,
+            "auc": 0.828125,
+            "ap": 0.857399,
+            "accuracy": 0.75,
+            "seconds": 0.183
+          },
+          {
+            "seed": 3,
+            "auc": 0.84375,
+            "ap": 0.863916,
+            "accuracy": 0.625,
+            "seconds": 0.15
+          },
+          {
+            "seed": 4,
+            "auc": 0.730469,
+            "ap": 0.738218,
+            "accuracy": 0.625,
+            "seconds": 0.136
+          }
+        ],
+        "graphforge-node2vec+heur": [
+          {
+            "seed": 0,
+            "auc": 0.789062,
+            "ap": 0.84109,
+            "accuracy": 0.6875,
+            "seconds": 0.153
+          },
+          {
+            "seed": 1,
+            "auc": 0.664062,
+            "ap": 0.706406,
+            "accuracy": 0.5625,
+            "seconds": 0.143
+          },
+          {
+            "seed": 2,
+            "auc": 0.78125,
+            "ap": 0.779238,
+            "accuracy": 0.65625,
+            "seconds": 0.235
+          },
+          {
+            "seed": 3,
+            "auc": 0.863281,
+            "ap": 0.829945,
+            "accuracy": 0.6875,
+            "seconds": 0.139
+          },
+          {
+            "seed": 4,
+            "auc": 0.785156,
+            "ap": 0.77296,
+            "accuracy": 0.625,
+            "seconds": 0.136
+          }
+        ],
+        "graphforge-node2vec(tier1)": [
+          {
+            "seed": 0,
+            "auc": 0.769531,
+            "ap": 0.808618,
+            "accuracy": 0.75,
+            "seconds": 0.153
+          },
+          {
+            "seed": 1,
+            "auc": 0.722656,
+            "ap": 0.742717,
+            "accuracy": 0.5625,
+            "seconds": 0.143
+          },
+          {
+            "seed": 2,
+            "auc": 0.765625,
+            "ap": 0.794158,
+            "accuracy": 0.71875,
+            "seconds": 0.235
+          },
+          {
+            "seed": 3,
+            "auc": 0.835938,
+            "ap": 0.839942,
+            "accuracy": 0.6875,
+            "seconds": 0.139
+          },
+          {
+            "seed": 4,
+            "auc": 0.78125,
+            "ap": 0.793181,
+            "accuracy": 0.625,
+            "seconds": 0.136
+          }
+        ],
+        "katz": [
+          {
+            "seed": 0,
+            "auc": 0.738281,
+            "ap": 0.748558,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.773438,
+            "ap": 0.746037,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 2,
+            "auc": 0.640625,
+            "ap": 0.637595,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 3,
+            "auc": 0.683594,
+            "ap": 0.686681,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 4,
+            "auc": 0.716797,
+            "ap": 0.761568,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          }
+        ],
+        "adamic_adar": [
+          {
+            "seed": 0,
+            "auc": 0.662109,
+            "ap": 0.650412,
+            "accuracy": 0.625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.738281,
+            "ap": 0.683036,
+            "accuracy": 0.65625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 2,
+            "auc": 0.566406,
+            "ap": 0.627146,
+            "accuracy": 0.53125,
+            "seconds": 0.0
+          },
+          {
+            "seed": 3,
+            "auc": 0.609375,
+            "ap": 0.653017,
+            "accuracy": 0.59375,
+            "seconds": 0.0
+          },
+          {
+            "seed": 4,
+            "auc": 0.697266,
+            "ap": 0.72433,
+            "accuracy": 0.6875,
+            "seconds": 0.0
+          }
+        ],
+        "common_neighbors": [
+          {
+            "seed": 0,
+            "auc": 0.664062,
+            "ap": 0.634615,
+            "accuracy": 0.65625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.732422,
+            "ap": 0.671875,
+            "accuracy": 0.75,
+            "seconds": 0.0
+          },
+          {
+            "seed": 2,
+            "auc": 0.591797,
+            "ap": 0.586806,
+            "accuracy": 0.5625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 3,
+            "auc": 0.597656,
+            "ap": 0.617857,
+            "accuracy": 0.5625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 4,
+            "auc": 0.685547,
+            "ap": 0.666667,
+            "accuracy": 0.65625,
+            "seconds": 0.0
+          }
+        ],
+        "resource_allocation": [
+          {
+            "seed": 0,
+            "auc": 0.658203,
+            "ap": 0.641037,
+            "accuracy": 0.5625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.738281,
+            "ap": 0.683036,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 2,
+            "auc": 0.566406,
+            "ap": 0.627146,
+            "accuracy": 0.59375,
+            "seconds": 0.0
+          },
+          {
+            "seed": 3,
+            "auc": 0.609375,
+            "ap": 0.653017,
+            "accuracy": 0.5625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 4,
+            "auc": 0.697266,
+            "ap": 0.72433,
+            "accuracy": 0.53125,
+            "seconds": 0.0
+          }
+        ],
+        "jaccard": [
+          {
+            "seed": 0,
+            "auc": 0.623047,
+            "ap": 0.560026,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.708984,
+            "ap": 0.654058,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 2,
+            "auc": 0.603516,
+            "ap": 0.637861,
+            "accuracy": 0.53125,
+            "seconds": 0.0
+          },
+          {
+            "seed": 3,
+            "auc": 0.613281,
+            "ap": 0.673214,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 4,
+            "auc": 0.681641,
+            "ap": 0.711018,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          }
+        ],
+        "preferential_attachment": [
+          {
+            "seed": 0,
+            "auc": 0.591797,
+            "ap": 0.62811,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.578125,
+            "ap": 0.579913,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 2,
+            "auc": 0.566406,
+            "ap": 0.53573,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 3,
+            "auc": 0.666016,
+            "ap": 0.628081,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 4,
+            "auc": 0.685547,
+            "ap": 0.655017,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          }
+        ],
+        "random": [
+          {
+            "seed": 0,
+            "auc": 0.390625,
+            "ap": 0.452371,
+            "accuracy": 0.40625,
+            "seconds": 0.0
+          },
+          {
+            "seed": 1,
+            "auc": 0.492188,
+            "ap": 0.529106,
+            "accuracy": 0.46875,
+            "seconds": 0.0
+          },
+          {
+            "seed": 2,
+            "auc": 0.507812,
+            "ap": 0.57791,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 3,
+            "auc": 0.46875,
+            "ap": 0.512945,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          },
+          {
+            "seed": 4,
+            "auc": 0.671875,
+            "ap": 0.67275,
+            "accuracy": 0.5,
+            "seconds": 0.0
+          }
+        ],
+        "spectral": [
+          {
+            "seed": 0,
+            "auc": 0.683594,
+            "ap": 0.738919,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 1,
+            "auc": 0.523438,
+            "ap": 0.542621,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 2,
+            "auc": 0.5,
+            "ap": 0.541457,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 3,
+            "auc": 0.113281,
+            "ap": 0.342834,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          },
+          {
+            "seed": 4,
+            "auc": 0.707031,
+            "ap": 0.758262,
+            "accuracy": 0.5,
+            "seconds": 0.001
+          }
+        ]
+      },
+      "table": "method                    seeds   auc_mean  auc_std   ap_mean   ap_std    \n--------------------------------------------------------------------------\ngraphforge-node2vec       5       0.8187    0.0462    0.8412    0.0488    \ndeepwalk(p=q=1)           5       0.7937    0.0407    0.8201    0.0451    \ngraphforge-node2vec+heur  5       0.7766    0.0639    0.7859    0.0480    \ngraphforge-node2vec(tier1)5       0.7750    0.0364    0.7957    0.0314    \nkatz                      5       0.7105    0.0456    0.7161    0.0470    \nadamic_adar               5       0.6547    0.0612    0.6676    0.0335    \ncommon_neighbors          5       0.6543    0.0535    0.6356    0.0316    \nresource_allocation       5       0.6539    0.0611    0.6657    0.0346    \njaccard                   5       0.6461    0.0416    0.6472    0.0500    \npreferential_attachment   5       0.6176    0.0486    0.6054    0.0424    \nrandom                    5       0.5062    0.0921    0.5490    0.0737    \nspectral                  5       0.5055    0.2128    0.5848    0.1523    ",
+      "comparisons": [
+        {
+          "challenger": "graphforge-node2vec",
+          "baseline": "katz",
+          "auc_mean_diff": 0.108203,
+          "std_gate": 0.045877,
+          "abs_gain": 0.108203,
+          "beats_by_mean": true,
+          "passes_std_gate": true,
+          "passes_abs_gate": true,
+          "significant": true
+        },
+        {
+          "challenger": "graphforge-node2vec",
+          "baseline": "deepwalk(p=q=1)",
+          "auc_mean_diff": 0.025,
+          "std_gate": 0.043447,
+          "abs_gain": 0.025,
+          "beats_by_mean": true,
+          "passes_std_gate": false,
+          "passes_abs_gate": false,
+          "significant": false
+        },
+        {
+          "challenger": "graphforge-node2vec",
+          "baseline": "graphforge-node2vec(tier1)",
+          "auc_mean_diff": 0.04375,
+          "std_gate": 0.041276,
+          "abs_gain": 0.04375,
+          "beats_by_mean": true,
+          "passes_std_gate": true,
+          "passes_abs_gate": true,
+          "significant": true
+        }
+      ],
+      "best_heuristic": "katz",
+      "failures": [
+        {
+          "kind": "false_positive",
+          "edge": [
+            4,
+            5
+          ],
+          "score": 0.47899,
+          "label": 0,
+          "common_neighbors": 2,
+          "deg_u": 3,
+          "deg_v": 2,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            4,
+            16
+          ],
+          "score": 0.474989,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 3,
+          "deg_v": 1,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            2,
+            13
+          ],
+          "score": 0.402962,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 4,
+          "deg_v": 2,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            1,
+            13
+          ],
+          "score": 0.428169,
+          "label": 1,
+          "common_neighbors": 1,
+          "deg_u": 6,
+          "deg_v": 2,
+          "attribution": "两端有 1 个共同邻居但打分仍偏低，说明该边依赖二阶以上结构，当前 p/q 偏置下的游走未能充分覆盖其邻域。",
+          "seed": 0,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            4,
+            16
+          ],
+          "score": 0.529321,
+          "label": 0,
+          "common_neighbors": 0,
+          "deg_u": 2,
+          "deg_v": 2,
+          "attribution": "两端在训练图中无共同邻居且分属不同社群，模型依据高阶相似误判为存在连边。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            5,
+            19
+          ],
+          "score": 0.51295,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 3,
+          "deg_v": 3,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            0,
+            8
+          ],
+          "score": 0.408992,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 10,
+          "deg_v": 2,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            0,
+            12
+          ],
+          "score": 0.419477,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 10,
+          "deg_v": 1,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 1,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            2,
+            33
+          ],
+          "score": 0.561788,
+          "label": 0,
+          "common_neighbors": 2,
+          "deg_u": 6,
+          "deg_v": 13,
+          "attribution": "两端均为高度节点（deg=6, deg=13），度效应使嵌入范数偏大，Hadamard 内积被放大，模型对 hub-hub 非边过度自信。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            2,
+            18
+          ],
+          "score": 0.533777,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 6,
+          "deg_v": 2,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            0,
+            31
+          ],
+          "score": 0.409734,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 11,
+          "deg_v": 2,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            1,
+            30
+          ],
+          "score": 0.47507,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 6,
+          "deg_v": 3,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 2,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            0,
+            33
+          ],
+          "score": 0.488087,
+          "label": 0,
+          "common_neighbors": 2,
+          "deg_u": 12,
+          "deg_v": 12,
+          "attribution": "两端均为高度节点（deg=12, deg=12），度效应使嵌入范数偏大，Hadamard 内积被放大，模型对 hub-hub 非边过度自信。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            3,
+            28
+          ],
+          "score": 0.465559,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 3,
+          "deg_v": 3,
+          "attribution": "局部与全局证据都偏弱，属于嵌入相似度噪声区域的误报。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            1,
+            30
+          ],
+          "score": 0.391174,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 4,
+          "deg_v": 3,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            1,
+            13
+          ],
+          "score": 0.440267,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 4,
+          "deg_v": 3,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 3,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            2,
+            33
+          ],
+          "score": 0.549356,
+          "label": 0,
+          "common_neighbors": 1,
+          "deg_u": 6,
+          "deg_v": 13,
+          "attribution": "两端均为高度节点（deg=6, deg=13），度效应使嵌入范数偏大，Hadamard 内积被放大，模型对 hub-hub 非边过度自信。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_positive",
+          "edge": [
+            2,
+            29
+          ],
+          "score": 0.519997,
+          "label": 0,
+          "common_neighbors": 0,
+          "deg_u": 6,
+          "deg_v": 3,
+          "attribution": "两端在训练图中无共同邻居且分属不同社群，模型依据高阶相似误判为存在连边。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            1,
+            30
+          ],
+          "score": 0.451484,
+          "label": 1,
+          "common_neighbors": 0,
+          "deg_u": 6,
+          "deg_v": 2,
+          "attribution": "该真实边在训练图中被物理删除后，两端失去全部共同邻居，游走无法在二者间建立共现，嵌入相似度过低 —— 典型的长程/跨社群边漏检。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        },
+        {
+          "kind": "false_negative",
+          "edge": [
+            0,
+            6
+          ],
+          "score": 0.463785,
+          "label": 1,
+          "common_neighbors": 1,
+          "deg_u": 10,
+          "deg_v": 1,
+          "attribution": "端点度数极低（deg=10, deg=1），游走访问次数不足，嵌入估计方差大，低度节点边系统性漏检。",
+          "seed": 4,
+          "method": "graphforge-node2vec"
+        }
+      ],
+      "total_seconds": 2.442
+    }
+  },
+  "demo_seconds": 40.27,
+  "budget_seconds": 60.0
+}

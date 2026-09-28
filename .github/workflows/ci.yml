@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install ruff pytest
+
+      - name: Lint (ruff)
+        run: ruff check graphforge tests examples
+
+      - name: Unit tests
+        run: pytest -q
+
+      - name: Demo smoke (offline benchmark)
+        run: python examples/run_demo.py --seeds 0 1 2 --nodes 300 --output benchmark.json
+
+      - name: Tier-1 offline fallback smoke
+        run: python -m graphforge.cli run --graph karate --tier1-only --dim 8 --num-walks 2

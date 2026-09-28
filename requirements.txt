@@ -1,0 +1,7 @@
+# GraphForge 运行依赖（作者: 晨星）
+# Tier-1 最小可用：只需 numpy；其余均为 Tier-2 可选加速，缺失自动降级。
+numpy>=1.24,<3
+scipy>=1.10
+scikit-learn>=1.5.0
+networkx>=3.0
+optuna>=3.4

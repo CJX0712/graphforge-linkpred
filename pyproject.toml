@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graphforge"
+version = "0.1.0"
+description = "GraphForge —— node2vec 图表示学习与链接预测系统"
+authors = [{ name = "晨星" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "networkx>=3.0",
+    "optuna>=3.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+
+[tool.setuptools.packages.find]
+include = ["graphforge*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "W", "I"]
+ignore = ["E741"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
